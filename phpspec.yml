@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Questions
+        psr4_prefix: Questions
+        src_path: app
