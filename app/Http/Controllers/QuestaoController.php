@@ -5,7 +5,8 @@ use Questions\Http\Controllers\Controller;
 use Questions\Questao;
 use Questions\Alternativa;
 
-use Illuminate\Http\Request;
+use Request;
+use Session;
 
 class QuestaoController extends Controller {
 
@@ -37,7 +38,7 @@ class QuestaoController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('questao.create');
 	}
 
 	/**
@@ -47,7 +48,10 @@ class QuestaoController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$questao=Request::all();
+		Questao::create($questao);
+		Session::set('message','Created successfully');
+		return redirect('questao');
 	}
 
 	/**
@@ -59,7 +63,6 @@ class QuestaoController extends Controller {
 	public function show($id)
 	{
 		$questao = Questao::find($id);
-		//y u no work? ¬¬
 		$alternativas = $questao->alternativas->toArray();
 		return view("questao.show",['questao'=>$questao,'alternativas'=>$alternativas]);
 	}
@@ -72,7 +75,8 @@ class QuestaoController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$questao=Questao::find($id);
+		return view('questao.edit',compact('questao'));
 	}
 
 	/**
@@ -83,7 +87,11 @@ class QuestaoController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$questaoUpdate=Request::all();
+		$book=Questao::find($id);
+		$book->update($questaoUpdate);
+		Session::set('message','Updated successfully');
+		return redirect('questao');
 	}
 
 	/**
@@ -94,7 +102,9 @@ class QuestaoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		Questao::find($id)->delete();
+		Session::set('message','Destroyed successfully');
+		return redirect('questao');
 	}
 
 }

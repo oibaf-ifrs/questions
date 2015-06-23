@@ -15,8 +15,13 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
+/*
 Route::get('questao', 'QuestaoController@index');
 Route::get('questao/{id}', 'QuestaoController@show');
+Route::get('questao/create', 'QuestaoController@create');
+*/
+
+Route::resource('questao','QuestaoController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

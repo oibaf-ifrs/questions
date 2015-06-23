@@ -61,5 +61,21 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script>
+	function checkDelete(id) {
+	if (confirm('Really delete?')) {
+	    $.ajax({
+	      type: "DELETE",
+		  headers: {
+	                    'X-CSRF-Token':  '{{ csrf_token() }}'
+	      },
+	      url: window.location.href + "/" + id,
+	      complete: function(result) {
+	        location.reload();
+	      }
+	    });
+	  }
+	}
+	</script>
 </body>
 </html>
