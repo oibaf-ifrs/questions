@@ -8,7 +8,7 @@ use Questions\Alternativa;
 use Request;
 use Session;
 
-class QuestaoController extends Controller {
+class AlternativaController extends Controller {
 
 	/**
 	 * Create a new controller instance.
@@ -27,8 +27,8 @@ class QuestaoController extends Controller {
 	 */
 	public function index()
 	{
-		$questoes = Questao::all();
-		return view("questao.index",compact("questoes"));
+		$alternativas = Alternativa::all();
+		return view("alternativa.index",compact("alternativas"));
 	}
 
 	/**
@@ -38,7 +38,8 @@ class QuestaoController extends Controller {
 	 */
 	public function create()
 	{
-		return view('questao.create');
+		$questoes = Questao::all();
+		return view('alternativa.create',compact("questoes"));
 	}
 
 	/**
@@ -48,10 +49,10 @@ class QuestaoController extends Controller {
 	 */
 	public function store()
 	{
-		$questao=Request::all();
-		Questao::create($questao);
+		$alternativa=Request::all();
+		Alternativa::create($alternativa);
 		Session::set('message','Created successfully');
-		return redirect('questao');
+		return redirect('alternativa');
 	}
 
 	/**
@@ -62,37 +63,9 @@ class QuestaoController extends Controller {
 	 */
 	public function show($id)
 	{
-		$questao = Questao::find($id);
-		$alternativas = $questao->alternativas;
-		return view("questao.show",['questao'=>$questao,'alternativas'=>$alternativas]);
-	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function correct($id, $alternativa)
-	{
-		$questao = Questao::find($id);
-		$questao->correta=$alternativa;
-		$questao->update();
-		$alternativas = $questao->alternativas;
-		return view("questao.show",['questao'=>$questao,'alternativas'=>$alternativas]);
-	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function all()
-	{
-		$questoes = Questao::all();
-		$alternativas = Alternativa::all();
-		return view("questao.all",['questoes'=>$questoes,'alternativas'=>$alternativas]);
+		$alternativa = Alternativa::find($id);
+		$questao = Questao::find($alternativa->questao_id);
+		return view("alternativa.show",['alternativa'=>$alternativa,'questao'=>$questao]);
 	}
 
 	/**
@@ -103,8 +76,9 @@ class QuestaoController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$questao=Questao::find($id);
-		return view('questao.edit',compact('questao'));
+		$alternativa=Alternativa::find($id);
+		$questoes = Questao::all();
+		return view('alternativa.edit',compact('alternativa','questoes'));
 	}
 
 	/**
@@ -115,11 +89,11 @@ class QuestaoController extends Controller {
 	 */
 	public function update($id)
 	{
-		$questaoUpdate=Request::all();
-		$questao=Questao::find($id);
-		$questao->update($questaoUpdate);
+		$AlternativaUpdate=Request::all();
+		$book=Alternativa::find($id);
+		$book->update($AlternativaUpdate);
 		Session::set('message','Updated successfully');
-		return redirect('questao');
+		return redirect('alternativa');
 	}
 
 	/**
@@ -130,9 +104,9 @@ class QuestaoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Questao::find($id)->delete();
+		Alternativa::find($id)->delete();
 		Session::set('message','Destroyed successfully');
-		return redirect('questao');
+		return redirect('alternativa');
 	}
 
 }

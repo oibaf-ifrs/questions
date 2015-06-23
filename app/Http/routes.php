@@ -20,8 +20,13 @@ Route::get('questao', 'QuestaoController@index');
 Route::get('questao/{id}', 'QuestaoController@show');
 Route::get('questao/create', 'QuestaoController@create');
 */
-
+// RESTFul controller
+//http://laravel.com/docs/5.0/controllers#restful-resource-controllers
 Route::resource('questao','QuestaoController');
+Route::post('questao/{param1?}/{param2?}', 'QuestaoController@correct');
+Route::get('questaoall', 'QuestaoController@all');
+
+Route::resource('alternativa','AlternativaController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

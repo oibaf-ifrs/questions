@@ -7,7 +7,8 @@ class Alternativa extends Model {
 	protected $table = 'alternativa';
 	
 	protected $fillable=[
-        'texto'
+        'texto',
+		'questao_id'
     ];
 
 	function questao() {

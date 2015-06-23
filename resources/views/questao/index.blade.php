@@ -12,7 +12,7 @@
 	<a href="{{ action('QuestaoController@create') }}" class="btn btn-success">New</a>
   <ul>
 	@foreach($questoes as $questao)
-		<li><a href="{{ action('QuestaoController@show', [$questao->id]) }}">{{ $questao->texto }}</a><a href="{{ action('QuestaoController@edit', [$questao->id]) }}" class="btn btn-warning">Update</a>
+		<li><a href="{{ action('QuestaoController@show', [$questao->id]) }}">{{ $questao->texto }}</a> <a href="{{ action('QuestaoController@edit', [$questao->id]) }}" class="btn btn-warning">Update</a>
         <a onclick="checkDelete({{ $questao->id }});" class="btn btn-warning">Delete</a></li>
 	@endforeach
 	</ul>

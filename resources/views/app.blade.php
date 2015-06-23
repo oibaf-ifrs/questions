@@ -36,7 +36,9 @@
 					<li><a href="{{ url('/home') }}">Home</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ action('QuestaoController@index') }}">Questões</a></li>
+					<li><a href="{{ action('QuestaoController@index') }}">Questions</a></li>
+					<li><a href="{{ action('AlternativaController@index') }}">Alternatives</a></li>
+					<li><a href="{{ action('QuestaoController@all') }}">Questions - EXAM</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
